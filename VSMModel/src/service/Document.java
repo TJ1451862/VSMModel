@@ -24,11 +24,8 @@ public class Document {
     public Document(String docPath, int docID) {
         this.docPath = docPath;
         this.docID = docID;
-    }
+        setWordTf();
 
-
-    public void setDocID(int docID){
-        this.docID=docID;
     }
 
     public int getDocID(){

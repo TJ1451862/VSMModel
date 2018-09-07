@@ -18,6 +18,10 @@ public class DocSet {
 
     public DocSet(String folderPath){
         this.folderPath=folderPath;
+        setIndexMap();
+        setWordIdf();
+        setDocTfs();
+        setDocVectors();
     }
 
     public String getFolderPath(){
@@ -56,11 +60,6 @@ public class DocSet {
                 ID++;
             }
         }
-        //String File=readToString(FilePath);
-        //System.out.print(File);
-        System.out.println("倒排索引：");
-        System.out.println(indexMap);
-        System.out.println();
         try{
             FileWriter inIn = new FileWriter(new File("intertedIndex.txt"));
             inIn.write(indexMap.toString());
@@ -72,7 +71,6 @@ public class DocSet {
     }//建立倒排索引
 
     public Map<String, ArrayList<Integer>> getIndexMap(){
-        setIndexMap();
         return indexMap;
     }
 
@@ -104,23 +102,18 @@ public class DocSet {
             idf=Math.log(N/(wordIdf.get(key)));
             wordIdf.put(key,idf);
         }
-        //System.out.println(idfmap);
 
         try{
-            FileWriter inIn = new FileWriter(new File("idfIndex.txt"));
+            FileWriter inIn = new FileWriter(new File("VSMModel/idfIndex.txt"));
             inIn.write(wordIdf.toString());
             inIn.close();
         }catch (Exception e){
             System.out.println(e.getStackTrace());
         }
 
-        System.out.println("文档集idf为");
-        System.out.println(wordIdf);
-        System.out.println();
-    }//求Idf,idf=log(N/df)
+        }//求Idf,idf=log(N/df)
 
     public Map<String, Double> getWordIdf() {
-        setWordIdf();
         return wordIdf;
     }
 

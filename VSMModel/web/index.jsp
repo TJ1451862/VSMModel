@@ -48,7 +48,7 @@
           <li><input type="button" name="segmentQuery" value="去标点" onclick="removePunctuation()"/></li></br>
           <li><input type="button" name="segmentQuery" value="去停用词" onclick="removeStopWords()"/></li></br>
           <li><input type="button" name="segmentQuery" value="求tf" onclick="countTf()"/></li></br>
-          <li><input type="button" name="segmentQuery" value="求查询向量" onclick="outPutVector()"/></li></br>
+          <li><input type="button" name="segmentQuery" value="求查询向量" onclick="outputVector()"/></li></br>
 
         </ol>
       </div>
@@ -182,9 +182,9 @@
         request.send();
     }
 
-    function outPutVector() {
+    function outputVector() {
         var request=new XMLHttpRequest();
-        request.open("POST","outPutVector",true);
+        request.open("POST","outputVector",true);
         request.onreadystatechange=function () {
             if(request.readyState==4&&request.status==200){
                 console.log(request.responseText);

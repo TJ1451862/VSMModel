@@ -14,7 +14,7 @@ public class Query {
     private String query;
     private Map<String, Double> wordTf = new HashMap<>();
     private double[] queryVector;
-    private Map<String,Double> word_vector=new HashMap<>();
+    private Map<String,Double> wordVector=new HashMap<>();
 
 
     public Query(String query) {
@@ -99,6 +99,8 @@ public class Query {
     }//求向量
 
     public double[] getQueryVector()  {
+        DocSet docSet=new DocSet("E:\\code\\idea\\VSMWeb3\\VSMModel\\text");
+        setQueryVector(docSet.getWordIdf());
         return queryVector;
     }
 
@@ -113,24 +115,29 @@ public class Query {
                 double idf = wordIdf.get(in);
                 if((tf!=0)&&(idf!=0))
                     vector[num] = tf * idf;
-                word_vector.put(in,vector[num]);
+                wordVector.put(in,vector[num]);
             }else {
                 num++;
             }
         }
         double sum=0;
-        for (String in:word_vector.keySet()) {
-            sum+=Math.pow(word_vector.get(in),2);
+        for (String in:wordVector.keySet()) {
+            sum+=Math.pow(wordVector.get(in),2);
         }
         sum=Math.pow(sum,0.5);
-        for (String in:word_vector.keySet()) {
-            double value=word_vector.get(in)/sum;
-            word_vector.put(in,value);
+        for (String in:wordVector.keySet()) {
+            double value=wordVector.get(in)/sum;
+            wordVector.put(in,value);
         }
+        System.out.println(wordVector);
     }
 
-    public Map<String,Double> getWord_vector(){
-        return word_vector;
+    public Map<String,Double> getWordVector(){
+        DocSet docSet=new DocSet("E:\\code\\idea\\VSMWeb3\\VSMModel\\text");
+        Map<String, Double> wordIdf=docSet.getWordIdf();
+        setWordVector(wordIdf);
+        System.out.println(wordVector);
+        return wordVector;
     }
 
 }

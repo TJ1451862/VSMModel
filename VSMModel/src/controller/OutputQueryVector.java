@@ -14,13 +14,11 @@ import static util.ReadDoc.readDoc;
 
 public class OutputQueryVector extends HttpServlet {
 
-
-
     public void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         Query query=new Query(readDoc("E:\\code\\idea\\VSMWeb3\\VSMModel\\Query.txt"));
-        Map<String,Double> word_vector=query.getWord_vector();
+        Map<String,Double> word_vector=query.getWordVector();
         String output="[0.0,";
         for (String in:word_vector.keySet()) {
             output=output+"……,("+in+")"+word_vector.get(in)+",";

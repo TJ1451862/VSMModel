@@ -34,4 +34,82 @@
         <url-pattern>/outputWordIdf</url-pattern>
     </servlet-mapping>
 
+
+    <servlet>
+        <servlet-name>OutputQuerySegment</servlet-name>
+        <servlet-class>controller.OutputQuerySegment</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>OutputQuerySegment</servlet-name>
+        <url-pattern>/segmentQuery</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>RemoveQueryPunctuation</servlet-name>
+        <servlet-class>controller.RemoveQueryPunctuation</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RemoveQueryPunctuation</servlet-name>
+        <url-pattern>/removePunctuation</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RemoveQueryStopWords</servlet-name>
+        <servlet-class>controller.RemoveQueryStopWords</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RemoveQueryStopWords</servlet-name>
+        <url-pattern>/removeStopWords</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>OutputQueryTf</servlet-name>
+        <servlet-class>controller.OutputQueryTf</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>OutputQueryTf</servlet-name>
+        <url-pattern>/countTf</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>OutputQueryVector</servlet-name>
+        <servlet-class>controller.OutputQueryVector</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>OutputQueryVector</servlet-name>
+        <url-pattern>/outputVector</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>OutputEveryDocTf</servlet-name>
+        <servlet-class>controller.OutputEveryDocTf</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>OutputEveryDocTf</servlet-name>
+        <url-pattern>/outPutEveryDoc_Tf</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>OutputEveryDocVector</servlet-name>
+        <servlet-class>controller.OutputEveryDocVector</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>OutputEveryDocVector</servlet-name>
+        <url-pattern>/outPutEveryDoc_Vector</url-pattern>
+    </servlet-mapping>
+
+
+
+
+
 </web-app>
