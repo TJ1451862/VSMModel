@@ -1,18 +1,14 @@
-package vectorSpaceModel;
+package service;
 
 import com.hankcs.hanlp.HanLP;
 import com.hankcs.hanlp.seg.common.Term;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static utils.ReadDoc.readDoc;
-import static utils.ReadStopWords.readStopWords;
+import static util.ReadStopWords.readStopWords;
 
 public class Query {
     private String query;

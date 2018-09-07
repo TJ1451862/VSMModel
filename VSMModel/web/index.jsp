@@ -16,7 +16,7 @@
 <form style="text-align: center" >
   <label >查询:</label>
   <input type="text"  name="query" id="query" value="" />
-  <input type="button" name="submit" value="确定" onclick="getQuery()"/>
+  <input type="button" name="submit" value="确定" onclick="inputQuery()"/>
   <input type="button" name="result" value="查询结果" onclick="outputResult()"/>
   <input type="reset" value="重置" name="reset" />
 </form>
@@ -35,8 +35,8 @@
     <td valign="top">
       <div id="docSet">
         <ol>
-          <li><input type="button" name="segmentQuery" value="建立倒排索引" onclick="createIndex()"/></li></br>
-          <li><input type="button" name="segmentQuery" value="求idf" onclick="countIdf()"/></li></br>
+          <li><input type="button" name="segmentQuery" value="建立倒排索引" onclick="outputIndex()"/></li></br>
+          <li><input type="button" name="segmentQuery" value="求idf" onclick="outputWordIdf()"/></li></br>
         </ol>
       </div>
     </td>
@@ -85,9 +85,9 @@
 
 <script type="text/javascript">
 
-    function createIndex(){
+    function outputIndex(){
         var request=new XMLHttpRequest();
-        request.open("POST","createIndex",true);
+        request.open("POST","outputIndex",true);
         request.onreadystatechange=function () {
             if(request.readyState==4&&request.status==200){
                 console.log(request.responseText);
@@ -97,9 +97,9 @@
         request.send();
     }
 
-    function countIdf(){
+    function outputWordIdf(){
         var request=new XMLHttpRequest();
-        request.open("POST","countIdf",true);
+        request.open("POST","outputWordIdf",true);
         request.onreadystatechange=function () {
             if(request.readyState==4&&request.status==200){
                 console.log(request.responseText);
@@ -109,9 +109,9 @@
         request.send();
     }
 
-    function getQuery() {
+    function inputQuery() {
         var request=new XMLHttpRequest();
-        request.open("GET","getQuery?query="+document.getElementById("query").value,true);
+        request.open("GET","inputQuery?query="+document.getElementById("query").value,true);
         request.onreadystatechange=function () {
             if(request.readyState==4&&request.status==200){
                 console.log(request.responseText);

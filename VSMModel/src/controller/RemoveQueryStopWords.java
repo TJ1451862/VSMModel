@@ -1,7 +1,6 @@
 package controller;
 
-import com.hankcs.hanlp.seg.common.Term;
-import vectorSpaceModel.Query;
+import service.Query;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,9 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
 
-import static utils.ReadDoc.readDoc;
+import static util.ReadDoc.readDoc;
 
 public class RemoveQueryStopWords extends HttpServlet {
 

@@ -1,8 +1,7 @@
 package controller;
 
-import com.hankcs.hanlp.HanLP;
 import com.hankcs.hanlp.seg.common.Term;
-import vectorSpaceModel.Query;
+import service.Query;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-import static utils.ReadDoc.readDoc;
+import static util.ReadDoc.readDoc;
 
 public class RemoveQueryPunctuation extends HttpServlet {
 

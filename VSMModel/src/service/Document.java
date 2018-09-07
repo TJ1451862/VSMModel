@@ -1,4 +1,4 @@
-package vectorSpaceModel;
+package service;
 
 import com.hankcs.hanlp.HanLP;
 import com.hankcs.hanlp.seg.common.Term;
@@ -9,8 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static utils.ReadDoc.readDoc;
-import static utils.ReadStopWords.readStopWords;
+import static util.ReadDoc.readDoc;
+import static util.ReadStopWords.readStopWords;
 
 
 public class Document {

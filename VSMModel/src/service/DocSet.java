@@ -1,4 +1,4 @@
-package vectorSpaceModel;
+package service;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -72,6 +72,7 @@ public class DocSet {
     }//建立倒排索引
 
     public Map<String, ArrayList<Integer>> getIndexMap(){
+        setIndexMap();
         return indexMap;
     }
 
@@ -119,6 +120,7 @@ public class DocSet {
     }//求Idf,idf=log(N/df)
 
     public Map<String, Double> getWordIdf() {
+        setWordIdf();
         return wordIdf;
     }
 
@@ -139,6 +141,31 @@ public class DocSet {
                 Document doc=new Document(FilePath,ID);
                 Map<String, Double> wordTf=doc.getWordTf();
                 docTfs.put(ID,wordTf);
+                ID++;
+            }
+        }
+    }
+
+    public Map<Integer,List> getDocVectors(){
+        return docVectors;
+    }
+
+    public void setDocVectors(){
+        File file = new File(folderPath);
+        Map<Integer,List> docVectors=new HashMap<>();
+        if (file.exists())
+        {
+            File[] files = file.listFiles();
+            int ID=10;
+            for (File file2 : files) {
+                String FilePath=file2.getAbsolutePath();
+                Document doc=new Document(FilePath,ID);
+                double[] vector=doc.getDocVector(wordIdf);
+                List<Double> vector_List=new ArrayList<>();
+                for (int i = 0; i <vector.length ; i++) {
+                    vector_List.add(vector[i]);
+                }
+                docVectors.put(ID,vector_List);
                 ID++;
             }
         }

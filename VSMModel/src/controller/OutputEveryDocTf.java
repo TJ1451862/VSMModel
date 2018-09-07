@@ -1,17 +1,13 @@
 package controller;
 
-import vectorSpaceModel.DocSet;
-import vectorSpaceModel.Document;
+import service.DocSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.event.DocumentEvent;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.Map;
 
 public class OutputEveryDocTf extends HttpServlet {

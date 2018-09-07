@@ -1,6 +1,6 @@
 package controller;
 
-import vectorSpaceModel.DocSet;
+import service.DocSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

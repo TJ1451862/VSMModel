@@ -3,4 +3,35 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+
+    <servlet>
+        <servlet-name>InputQuery</servlet-name>
+        <servlet-class>controller.InputQuery</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>InputQuery</servlet-name>
+        <url-pattern>/inputQuery</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>OutputIndex</servlet-name>
+        <servlet-class>controller.OutputIndex</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>OutputIndex</servlet-name>
+        <url-pattern>/outputIndex</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>OutputWordIdf</servlet-name>
+        <servlet-class>controller.OutputWordIdf</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>OutputWordIdf</servlet-name>
+        <url-pattern>/outputWordIdf</url-pattern>
+    </servlet-mapping>
+
 </web-app>
