@@ -3,6 +3,8 @@ package service;
 import com.hankcs.hanlp.HanLP;
 import com.hankcs.hanlp.seg.common.Term;
 
+import util.ReadDoc;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,13 +14,12 @@ import static util.ReadStopWords.readStopWords;
 
 public class Query {
     private String query;
-    private Map<String, Double> wordTf = new HashMap<>();
-    private double[] queryVector;
-    private Map<String,Double> wordVector=new HashMap<>();
+    private Map<String, Double> wordTf;
 
 
     public Query(String query) {
         this.query = query;
+        this.wordTf=countWordTf();
     }
 
     public String getQuery()//输出源文件
@@ -58,7 +59,9 @@ public class Query {
         return TermList;
     }
 
-    public void setWordTf(){
+    public Map<String, Double> countWordTf(){
+
+        Map<String, Double> wordTf = new HashMap<>();
         ArrayList<String> termList = removeStopWords();
         for (String string : termList) {
             if (!wordTf.containsKey(string)) {
@@ -68,44 +71,38 @@ public class Query {
                 wordTf.put(string, tf);
             }
         }
+        return wordTf;
     }//计算tf,tf=1+log(tf)
 
-    public Map<String, Double> getWordTf() {
-        setWordTf();
-        return wordTf;
-    }
+    public double[] countQueryVector(Map<String, Double> wordIdf){
 
-    public void setQueryVector(Map<String, Double> wordIdf){
+        double[] queryVector;
         int idfLength = wordIdf.size();
-        double[] vector = new double[idfLength + 1];
+        queryVector = new double[idfLength + 1];
         int num = 0;
         for (String in : wordIdf.keySet()) {
             if (wordTf.containsKey(in)) {
                 double tf = wordTf.get(in);
                 double idf = wordIdf.get(in);
-                vector[num] = tf * idf;
+                queryVector[num] = tf * idf;
             } else {
                 num++;
             }
         }
         double sum = 0;
-        for (double j : vector) {
+        for (double j : queryVector) {
             sum += Math.pow(j, 2);
         }
         sum = Math.pow(sum, 0.5);
-        for (int i = 0; i < vector.length; i++) {
-            vector[i] = vector[i] / sum;
+        for (int i = 0; i < queryVector.length; i++) {
+            queryVector[i] = queryVector[i] / sum;
         }
+        return queryVector;
     }//求向量
 
-    public double[] getQueryVector()  {
-        DocSet docSet=new DocSet("E:\\code\\idea\\VSMWeb3\\VSMModel\\text");
-        setQueryVector(docSet.getWordIdf());
-        return queryVector;
-    }
+    public  Map<String,Double> countWordVector(Map<String, Double> wordIdf){
 
-    public  void setWordVector(Map<String, Double> wordIdf){
-
+        Map<String,Double> wordVector=new HashMap<>();
         int idfLength = wordIdf.size();
         double[] vector = new double[idfLength + 1];
         int num = 0;
@@ -129,14 +126,6 @@ public class Query {
             double value=wordVector.get(in)/sum;
             wordVector.put(in,value);
         }
-        System.out.println(wordVector);
-    }
-
-    public Map<String,Double> getWordVector(){
-        DocSet docSet=new DocSet("E:\\code\\idea\\VSMWeb3\\VSMModel\\text");
-        Map<String, Double> wordIdf=docSet.getWordIdf();
-        setWordVector(wordIdf);
-        System.out.println(wordVector);
         return wordVector;
     }
 

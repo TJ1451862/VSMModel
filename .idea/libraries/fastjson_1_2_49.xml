@@ -1,9 +1,7 @@
 <component name="libraryTable">
-  <library name="hanlp-1.6.8">
+  <library name="fastjson-1.2.49">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/VSMModel/lib/hanlp-1.6.8.jar!/" />
       <root url="jar://$PROJECT_DIR$/VSMModel/lib/fastjson-1.2.49.jar!/" />
-      <root url="jar://$USER_HOME$/Downloads/fastjson-1.2.49.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -17,29 +17,13 @@ public class Document {
 
     private String docPath;
     private int docID;
-    private Map<String, Double> wordTf = new HashMap<>();
-    private double[] docVector;
+    private Map<String, Double> wordTf;
 
 
     public Document(String docPath, int docID) {
         this.docPath = docPath;
         this.docID = docID;
-        setWordTf();
-
-    }
-
-    public int getDocID(){
-        return docID;
-    }
-
-    public void printDocument()//输出源文件
-    {
-
-
-        String doc = readDoc(docPath);
-        System.out.println("文章" + docID + "/n");
-        System.out.print(doc);
-        System.out.println("\n");
+        this.wordTf=setWordTf();
     }
 
     public List<Term> segment(){
@@ -75,7 +59,9 @@ public class Document {
         return TermList;
     }
 
-    public void setWordTf(){
+    public Map<String, Double> setWordTf(){
+
+        Map<String, Double> wordTf = new HashMap<>();
         ArrayList<String> termList = removeStopWords();
         for (String string : termList) {
             if (!wordTf.containsKey(string)) {
@@ -85,14 +71,16 @@ public class Document {
                 wordTf.put(string, tf);
             }
         }
+        return wordTf;
     }
 
     public Map<String, Double> getWordTf() {
-        setWordTf();
         return wordTf;
     }//计算tf,tf=1+log(tf)
 
-    public void setDocVector(Map<String, Double> wordIdf){
+    public double[] countDocVector(Map<String, Double> wordIdf){
+
+        double[] docVector;
         int idfLength = wordIdf.size();
         docVector=new double[idfLength+1];
         int num = 0;
@@ -113,10 +101,38 @@ public class Document {
         for (int i = 0; i < docVector.length; i++) {
             docVector[i] = docVector[i] / sum;
         }
-    }
-
-    public double[] getDocVector(Map<String, Double> wordIdf)  {
-        setDocVector(wordIdf);
         return docVector;
     }
+
+    public Map<String,Double> countWordVector(Map<String, Double> wordIdf){
+
+        Map<String,Double> wordVector=new HashMap<>();
+        int idfLength = wordIdf.size();
+        double[] vector = new double[idfLength + 1];
+        int num = 0;
+        for (String in : wordIdf.keySet()) {
+            if(wordTf.containsKey(in)){
+                double tf = wordTf.get(in);
+                double idf = wordIdf.get(in);
+                if((tf!=0)&&(idf!=0))
+                    vector[num] = tf * idf;
+                wordVector.put(in,vector[num]);
+                num++;
+            }else {
+                num++;
+            }
+        }
+        double sum=0;
+        for (String in:wordVector.keySet()) {
+            sum+=Math.pow(wordVector.get(in),2);
+        }
+        sum=Math.pow(sum,0.5);
+        for (String in:wordVector.keySet()) {
+            double value=wordVector.get(in)/sum;
+            wordVector.put(in,value);
+        }
+        return wordVector;
+
+    }
+
 }

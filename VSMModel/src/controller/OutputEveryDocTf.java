@@ -16,7 +16,7 @@ public class OutputEveryDocTf extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         DocSet docSet=new DocSet("E:\\code\\idea\\VSMWeb3\\VSMModel\\text");
-        Map<Integer,Map<String, Double>> docTfs=docSet.getDocTfs();
+        Map<Integer,Map<String, Double>> docTfs=docSet.countDocTfs();
         //JSONObject jsonObject=JSONObject.parseObject(JSON.toJSONString(map));
         //out.print(jsonObject);
         out.write(docTfs.toString());

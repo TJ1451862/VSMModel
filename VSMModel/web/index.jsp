@@ -9,6 +9,7 @@
 <html>
 <head>
   <title>向量空间模型</title>
+  <script type="application/javascript" src="static/jquery.js"></script>
 </head>
 <body>
 <h1 style="text-align: center">向量空间模型</h1>
@@ -16,8 +17,8 @@
 <form style="text-align: center" >
   <label >查询:</label>
   <input type="text"  name="query" id="query" value="" />
-  <input type="button" name="submit" value="确定" onclick="inputQuery()"/>
-  <input type="button" name="result" value="查询结果" onclick="outputResult()"/>
+  <%--<input type="button" name="submit" value="确定" onclick="inputQuery()"/>--%>
+  <input type="button" name="result" value="查询" onclick="outputResult()"/>
   <input type="reset" value="重置" name="reset" />
 </form>
 
@@ -109,7 +110,7 @@
         request.send();
     }
 
-    function inputQuery() {
+    /*function inputQuery() {
         var request=new XMLHttpRequest();
         request.open("GET","inputQuery?query="+document.getElementById("query").value,true);
         request.onreadystatechange=function () {
@@ -120,7 +121,7 @@
         }
         request.send();
 
-    };
+    };*/
 
     function segmentQuery(){
         var request=new XMLHttpRequest();
@@ -159,15 +160,27 @@
     }
 
     function countTf() {
-        var request=new XMLHttpRequest();
-        request.open("POST","countTf",true);
-        request.onreadystatechange=function () {
-            if(request.readyState==4&&request.status==200){
-                console.log(request.responseText);
-                document.getElementById("result").innerHTML=request.responseText;
+        $.ajax({
+            type:"POST",
+            url:"countTf",
+            traditional: true,
+            datatype:"json",
+            contentType:"application/x-www-form-urlencoded; charset=utf-8",
+            success:function(wordTf){
+                var jsonObj=JSON.parse(wordTf);
+                var result='';
+                for (var str in jsonObj)
+                {
+                    result+=str+"："+jsonObj[str]+"\n";
+                    //result += "词“"+str+"”的Tf值为："+jsonObj[str]+"\n";
+                }
+                console.log(wordTf);
+                document.getElementById("result").innerHTML=result;
+            },
+            error : function() {
+                alert("文件名wordTf出错！");
             }
-        }
-        request.send();
+        });
     }
 
     function setVector() {
@@ -244,7 +257,7 @@
 
     function outputResult(){
         var request=new XMLHttpRequest();
-        request.open("POST","outputResult",true);
+        request.open("GET","outputResult?query="+document.getElementById("query").value,true);
         request.onreadystatechange=function () {
             if(request.readyState==4&&request.status==200){
                 console.log(request.responseText);

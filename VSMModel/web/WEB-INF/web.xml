@@ -109,6 +109,38 @@
     </servlet-mapping>
 
 
+    <servlet>
+        <servlet-name>OutputSimilarities</servlet-name>
+        <servlet-class>controller.OutputSimilarities</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>OutputSimilarities</servlet-name>
+        <url-pattern>/countSimilarities</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SortSimilarities</servlet-name>
+        <servlet-class>controller.SortSimilarities</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SortSimilarities</servlet-name>
+        <url-pattern>/sortSimilarities</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>OutputResult</servlet-name>
+        <servlet-class>controller.OutputResult</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>OutputResult</servlet-name>
+        <url-pattern>/outputResult</url-pattern>
+    </servlet-mapping>
+
+
+
 
 
 
